@@ -1,0 +1,133 @@
+---
+title: 'Homework 7: Functions for Compartmental Models and Reproductive Numbers'
+subtitle: "STAT 244NF: Infectious Disease Modeling"
+author: "YOUR NAME HERE"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(dplyr)
+```
+
+## Instructions:
+
+1. Please replace "YOUR NAME HERE" under author above with your name before you knit your final document for submission.
+2. All of your homework needs to be completed in this document, whether it requires R or just typed responses. As we incorporate more statistical computing into the course, it will be important that you are comfortable with R Markdown, so start now. Remember that R Markdown gives us a convenient framework for reproducible statistical reports because it contains a complete record of our analyses and conclusions.
+3. You may knit to PDF, HTML, or Word (click on the drop-down menu for Knit to choose the file output type). 
+4. Before submitting your work, please make sure the knitted file is well organized, legible, and looks the way you expect!
+5. Please include the names of any classmates with whom you worked on this homework, as well as any external resources that you might have used.
+6. This homework assignment is **due on Friday, October 29, 2021 and should be submitted to Gradescope**.
+
+- *Collaborators:*
+
+- *External resources:*
+
+## Reproductive Numbers
+
+**(a) Write a function to calculate the reproductive number for an SI model, where the growth rate and infectious period are variables in the function and the function returns the value of the reproductive number. Call the function RN_SI. To test your function, verify that for $\Lambda=0.5$ cases/day and $D=2$ days, the resulting reproductive number is 2. You must show this to get full credit.** 
+
+```{r}
+
+```
+
+**(b) Write a function to calculate the reproductive number for an SEIR model, where the growth rate and serial interval are variables in the function, and the function returns the value of the reproductive number. Call the function RN_SEIR. To test your function, verify that for a growth rate of 1.2 cases/day and a serial interval of 2.2 days, the resulting reproductive number is 3.64. You must show this to get full credit.** 
+
+```{r}
+
+```
+
+**(c) The herd immunity threshold, which is defined as the proportion of the population that need to be immune for the effective reproductive number to be 1 (endemic state - not growing or shrinking), is calculated as $1-\frac{1}{R_0}$. What is the the herd immunity threshold for the infection described in (b)?**
+
+```{r}
+
+```
+
+**(d) Suppose for the infection described in (b), 75% of the population are immune through vaccination. Will the reproductive number be greater than 1 (meaning it will continue to spread in the population), exactly 1 (meaning it will remain steady in the population, neither growing nor shrinking), or less than 1 (meaning we have interrupted the chain of transmission and the infection will subside in the population)?**
+
+
+
+
+## HIV
+
+For sexually-transmitted infections (primary mode of transmission for HIV), we need to make a slight modification to the $S\rightarrow I$ transition parameter. In this case, because sexual contacts are easy to count (relative to contacts associated with respiratory transmission, for example), we can decompose $c_e$ into two components, the number of sexual contacts per unit time ($k_s$), and the probability of infection given contact between a susceptible and infectious individual ($p^c(t)$). In this case, 
+
+$$\lambda_t=1-\exp\left\{- k_sp^c(t)\times \frac{I_{t-1}}{N}\right\};$$
+
+$k_sp^c(t)$ is replacing $c_e$ in this case. This allows us to investigate the effect of sexual activity level. As before, we will assume $p^c(t)$ is constant for now. 
+
+**(a) Modify your code from Homework 6 by creating a function to run your simulation. Call your function SI_STI (which denotes that it is for an SI model and a sexually-transmitted infection. In order to receive full credit, your function must do the following:**
+
+- Use $k_s$, $p^c(t)$, $N$, $t$, $I_0$ as variables (you can name them in an informative way that is valid in R, but they all have to be variables in the model - they cannot be fixed quantities).
+- Return a data frame with three columns, called time, compartment, and count
+
+```{r}
+
+```
+
+**(b) Run your function for the following arguments. Then, plot each result using ggplot. Note, for each combination of arguments, you will need to save your function as something so that you will be able to use that object (a data frame) for plotting.**
+
+- $k_s=3; \ p^c(t)=0.2; \ N=500; \ t=52; \ I_0=1$
+
+```{r}
+
+```
+
+- $k_s=5; \ p^c(t)=0.2; \ N=500; \ t=52; \ I_0=1$
+
+```{r}
+
+```
+
+- $k_s=3; \ p^c(t)=0.1; \ N=500; \ t=52; \ I_0=1$
+
+```{r}
+
+```
+
+- $k_s=3; \ p^c(t)=0.2; \ N=1000; \ t=52; \ I_0=1$
+
+```{r}
+
+```
+
+- $k_s=2; \ p^c(t)=0.1; \ N=1000; \ t=100; \ I_0=1$
+
+```{r}
+
+```
+
+## NSF CUE: Defining Functions in R
+
+Watch the NSF CUE video posted to Moodle for this week. Then answer the following questions.
+
+**1. Select all the ways a function can be structured.**
+
+  - (A) No data in, no data returned
+  - (B) Data in, no data returned
+  - (C) No data in, data returned
+  - (D) Data in, data returned
+  
+**2. What is the output value you would receive after executing the following R code?**
+
+```
+doubleprint <- function (value){
+  line <- paste("the value is", value)
+  print(line)
+  print(line)
+}
+```
+
+  - (A) 5
+  - (B) the value is 5
+  - (C) the value is 5
+  
+        the value is 5
+  - (D) the value is, 5
+  
+        the value is, 5
+        
+**3. Of the options selected available in 1, which best describes the structure of the function RN_SI that you wrote in Part (a) of the Reproductive Numbers section of the homework?**
